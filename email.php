@@ -1,39 +1,20 @@
 <?php
+$nombre = $_POST['nombre'];
+$email = $_POST['mail'];
+$apellido = $_POST['apellido'];
+$asunto = $_POST['asunto'];
+$comentario = $_POST['comentario'];
 
-include('db.php');
-
-if (isset($_POST['save_task'])) {
-  $titulo = $_POST['titulo'];
-  $descripcion = $_POST['descripcion'];
-  $tiempo = $_POST['tiempo'];
-  $observacion = $_POST['observacion'];
-  $id_alumno = $_POST['id_alumno'];
-  $query = "INSERT INTO tarea(titulo, descripcion, tiempo, observacion, id_alumno) VALUES ('$titulo', '$descripcion', '$tiempo', '$observacion', '$id_alumno')";
-  $result = mysqli_query($conn, $query);
-  if(!$result) {
-    die("Query Failed.");
-  }
-
-  $_SESSION['message'] = 'Tarea Guardada';
-  $_SESSION['message_type'] = 'success';
-  header('Location: index.php');
-
-}
-
-
-$query = "SELECT * FROM alumno WHERE id = '$id_alumno'";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result); 
-$nombre = $row['nombre'];
-$apellido = $row['apellido'];
-$email = $row['email'];
-$asunto = $titulo;
-$comentario = $descripcion;
-
-$body = "<h3><b>Se le asigno la siguiente tarea</b></h3><br><br>"
-        . "<b>Descripcion: </b>" . $comentario . "<br><br>"
-        . "<b>Fecha limite de entrega: </b>" . $tiempo . "<br><br>"
-        . "Muchas Gracias!<br>";
+$body = "<h3><b>Gracias por enviarnos su consulta</b></h3><br><br>"
+        . "<i>En breve nos comunicaremos con usted</i><br><br>"
+        . "<b>Su mensaje fue: </b><br><br>"
+        . "<b>Nombre: </b>" . $nombre . "<br><br>"
+        . "<b>Apellido: </b>" . $apellido . "<br><br>"
+        . "<b>Mail: </b>" . $email . "<br><br>"
+        . "<b>Consulta: </b>" . $comentario . "<br><br>"
+        . "Recuerde que este es un mensaje generado en forma automatica, no lo responda.<br>"
+        . "En caso de querer enviarnos otro mail hagalo a <b><i>mail calamar</b></i><br>"
+        . "Muchas Gracias!<br>CalamarEnSuTinta.";
         
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -57,8 +38,9 @@ try {
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom('consultashidroflores@gmail.com', 'TP_Final');
+    $mail->setFrom('consultashidroflores@gmail.com', 'Hidroflores');
     $mail->addAddress($email);     // Add a recipient
+    $mail->addAddress('consultashidroflores@gmail.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');

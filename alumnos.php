@@ -26,6 +26,9 @@
           <div class="form-group">
             <input name="apellido" type="text" class="form-control" placeholder="Apellido"/>
           </div>
+          <div class="form-group">
+            <input name="email" type="email" class="form-control" placeholder="Email"/>
+          </div>
           <input type="submit" name="save_alumno" class="btn btn-success btn-block" value="Ingresar Alumno">
         </form>
       </div>
@@ -38,6 +41,7 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Email</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -52,6 +56,7 @@
             <td><?php echo $row['id']; ?></td>
             <td><?php echo $row['nombre']; ?></td>
             <td><?php echo $row['apellido']; ?></td>
+            <td><?php echo $row['email']; ?></td>
             <td>
               <a href="edit_alumno.php?id=<?php echo $row['id']?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
